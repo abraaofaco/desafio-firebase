@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/gamesListFragment">
+    <fragment
+        android:id="@+id/gamesListFragment"
+        android:name="com.example.desafiofirebase.screen.fragment.GamesListFragment"
+        android:label="fragment_games_list"
+        tools:layout="@layout/fragment_games_list" >
+        <action
+            android:id="@+id/action_gamesListFragment_to_gameDetailsFragment"
+            app:destination="@id/gameDetailsFragment" />
+        <action
+            android:id="@+id/action_gamesListFragment_to_gameDataFragment"
+            app:destination="@id/gameDataFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameDetailsFragment"
+        android:name="com.example.desafiofirebase.screen.fragment.GameDetailsFragment"
+        android:label="fragment_game_details"
+        tools:layout="@layout/fragment_game_details" >
+        <action
+            android:id="@+id/action_gameDetailsFragment_to_gameDataFragment"
+            app:destination="@id/gameDataFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameDataFragment"
+        android:name="com.example.desafiofirebase.screen.fragment.GameDataFragment"
+        android:label="fragment_game_data"
+        tools:layout="@layout/fragment_game_data" />
+</navigation>
