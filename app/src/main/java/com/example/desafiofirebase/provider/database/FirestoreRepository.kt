@@ -49,14 +49,7 @@ class FirestoreRepository : IDatabaseProvider {
 
     override suspend fun update(game: Game) {
         try {
-            val obj: MutableMap<String, Any> = HashMap()
-
-            obj["name"] = game.name
-            obj["createdYear"] = game.createdYear
-            obj["description"] = game.description
-            obj["imageUrl"] = game.imageUrl
-
-            mGameCollection.document(game.uuid).set(game).await()// .update(obj).await()
+            mGameCollection.document(game.uuid).set(game).await()
         } catch (e: Exception) {
             Log.i("FirestoreRepo@update", e.message, e)
         }

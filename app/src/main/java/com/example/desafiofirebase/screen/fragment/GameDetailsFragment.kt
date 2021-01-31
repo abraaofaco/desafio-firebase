@@ -36,6 +36,8 @@ class GameDetailsFragment : Fragment() {
         arguments?.let {
             gameUUID = it.getString(SELECTED_GAME_PUT_EXTRA)!!
         }
+
+        mViewModel.loadGame(gameUUID)
     }
 
     override fun onCreateView(
@@ -73,13 +75,8 @@ class GameDetailsFragment : Fragment() {
                 container.txtYearGame.text = game.createdYear.toString()
                 container.txtDescriptionGame.text = game.description
                 glide.load(game.imageUrl).into(imgGame)
-                toolbar.title = game.name
+                toolbarLayout.title = game.name
             }
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        mViewModel.loadGame(gameUUID)
     }
 }

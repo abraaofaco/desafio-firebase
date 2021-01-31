@@ -35,7 +35,10 @@ class GameViewModel @Inject constructor(
 
     fun createGame(name: String, createdYear: Int, description: String, uri: Uri?) {
         viewModelScope.launch {
-            var imageUrl = uri?.toString() ?: ""
+            var imageUrl = ""
+            if(uri != null)
+                imageUrl = appStorage.upload(uri).toString()
+
             appDatabase.create(name, createdYear, description, imageUrl)
             loadGames()
         }
@@ -43,7 +46,13 @@ class GameViewModel @Inject constructor(
 
     fun updateGame(game: Game) {
         viewModelScope.launch {
+            if(game.imageUrl != null && game.imageUrl.indexOf("http") == -1) {
+                val uri = Uri.parse(game.imageUrl)
+                game.imageUrl = appStorage.upload(uri).toString()
+            }
+
             appDatabase.update(game)
+            loadGame(game.uuid)
             loadGames()
         }
     }
